@@ -1,0 +1,30 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: 10.0.0.1
+  gather_facts: True
+ 
+  # Vars: variables that will apply to the play, on all target systems
+
+  # Tasks: the list of tasks that will be executed within the playbook
+  tasks:
+    - name: Test hostvars with an ansible fact and collect ansible_port, dot notation
+      debug:
+        #msg: "{{ hostvars[ansible_hostname].ansible_port }}" #this was the code. i changed it to
+         msg: "{{ hostvars['10.0.0.1'].ansible_port }}"
+
+    - name: Test hostvars with an ansible fact and collect ansible_port, dict notation
+      debug:
+        #msg: "{{ hostvars[ansible_hostname].ansible_port }}" #this was the code. i changed it to
+        msg: "{{ hostvars['10.0.0.1']['ansible_port'] }}"
+ 
+# Three dots indicate the end of a YAML document
+#! it showed the port number in output
+#! it directly got the port number the ansible is running directly from the host. 
+#! note: it didn't get the port '2222' from the inventory file. it got directly from the host.
+...

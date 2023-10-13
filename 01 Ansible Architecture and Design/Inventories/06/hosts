@@ -1,0 +1,9 @@
+[centos]
+10.0.0.1 ansible_user=root ansible_port=2222
+10.0.0.2 ansible_user=root
+10.0.0.3 ansible_user=root
+
+[ubuntu]
+10.0.0.4 ansible_become=true ansible_become_pass=admin
+10.0.0.5 ansible_become=true ansible_become_pass=admin
+10.0.0.6 ansible_become=true ansible_become_pass=admin

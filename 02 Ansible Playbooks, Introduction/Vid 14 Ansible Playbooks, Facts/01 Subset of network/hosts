@@ -1,0 +1,12 @@
+[control]
+10.0.0.7
+
+[centos]
+10.0.0.[1:3]
+
+[ubuntu]
+10.0.0.[4:6]
+
+[linux:children]
+centos
+ubuntu

@@ -1,0 +1,15 @@
+---
+- name: Prompt for Password and Print
+  hosts: 10.0.0.1  # Replace with the target host(s)
+  gather_facts: False
+
+  tasks:
+    - name: Prompt for Password
+      pause:
+        prompt: "Enter the password:"
+      register: password_input
+
+    - name: Print Password
+      debug:
+        var: password_input.user_input
+...

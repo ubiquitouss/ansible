@@ -1,0 +1,33 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: 10.0.0.1
+  gather_facts: True
+ 
+  # Vars: variables that will apply to the play, on all target systems
+
+  # Tasks: the list of tasks that will be executed within the playbook
+  tasks:
+    - name: Test hostvars with an ansible fact and collect ansible_port, dot notation
+      debug:
+        msg: "{{ hostvars[inventory_hostname].ansible_port }}"
+
+    - name: Test groupvars
+      debug:
+        msg: "{{ ansible_user }}"
+
+
+#! I had to change the file name in host_vars to ip address instead of 10.0.0.1 was centos1 and 10.0.0.7 was ubuntu-c
+#! ansible_hostname and ansible_user combination in line 18 and 22 didn't work. so i had to change it to inventory and ansible combination
+#! difference between inventory and ansible keyword is most probably:
+#! inventory means it's default name by the system
+#! ansible means if you set the name by yourself. like in the tutorial did. he renamed the hostname as centos1,centos2,centos3
+#! to access the variables filename also had to be changed as the host name. like here i changed it to ip address. because the host had no name on it
+
+# Three dots indicate the end of a YAML document
+...

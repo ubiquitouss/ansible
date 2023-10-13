@@ -1,0 +1,9 @@
+[centos]
+10.0.0.1 ansible_user=root
+10.0.0.2 ansible_user=root
+10.0.0.3 ansible_user=root
+
+[ubuntu]
+10.0.0.4
+10.0.0.5
+10.0.0.6

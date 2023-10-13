@@ -1,0 +1,67 @@
+ansible_facts: ansible_facts is a special dictionary in Ansible 
+that holds all the facts gathered about a remote host. 
+It's automatically populated with information during playbook execution.
+
+When it says, "is added to the root of the facts namespace," 
+it means that the ansible_facts dictionary is available at the top level or 
+root of the facts hierarchy. In other words, 
+you can access facts within ansible_facts directly without needing to traverse 
+nested dictionaries or structures.
+
+So, when a module returns a dictionary of ansible_facts, 
+those facts are made easily accessible at the top level of the facts namespace. 
+This allows Ansible users to conveniently access and use the 
+information gathered by that module without needing to dig deep into nested structures.
+
+
+
+Output results were like 
+
+ansible_facts": {
+        "ansible_apparmor": {
+            "status": "disabled"
+        },
+        "ansible_architecture": "x86_64",
+        "ansible_cmdline": {
+            "BOOT_IMAGE": "/vmlinuz-4.15.18-pnetlab2",
+            "biosdevname": "0",
+            "net.ifnames": "0",
+            "quiet": true,
+            "ro": true,
+            "root": "/dev/mapper/ubuntu--vg-ubuntu--lv",
+            "splash": true,
+            "vga": "788"
+        },
+        "ansible_date_time": {
+            "date": "2023-10-11",
+            "day": "11",
+            "epoch": "1697005787",
+            "epoch_int": "1697005787",
+            "hour": "06",
+            "iso8601": "2023-10-11T06:29:47Z",
+            "iso8601_basic": "20231011T062947276683",
+            "iso8601_basic_short": "20231
+
+
+Now in playbook we wrote the code like 
+
+ tasks:
+    - name: Show IP Address
+      debug:
+        msg: "{{ ansible_default_ipv4.address }}"
+
+
+We ignored ansible_facts" which is at the top
+
+note: in tutoral there was "ansible_default_ipv4.address" 
+
+here we have section like: ansible_date_time"
+
+accordinh to our code we could write it like 
+
+ tasks:
+    - name: Show IP Address
+      debug:
+        msg: "{{ ansible_date_time }}"
+
+

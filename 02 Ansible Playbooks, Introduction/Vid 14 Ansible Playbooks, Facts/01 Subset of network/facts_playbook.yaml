@@ -1,0 +1,33 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: all
+
+  # Tasks: the list of tasks that will be executed within the play, this section
+  # can also be used for pre and post tasks
+  tasks:
+    - name: Show IP Address
+      debug:
+        # msg: "{{ ansible_default_ipv4.address }}"
+        # msg: "{{ ansible_date_time }}"  #in our case this code worked. because we didn't 
+        # get previous info in the command ansible 10.0.0.1 -m setup -a 'gather_subset=network'
+        msg: "{{ ansible_date_time.time }}"  # accessing data like python
+
+#! ansible 10.0.0.1 -m setup -a 'gather_subset=!all, !min, network' | more didn't work as the tutorial
+#! ansible 10.0.0.1 -m setup -a 'gather_subset=network' | more worked
+#! ansible 10.0.0.1 -m setup -a 'gather_subset=network' | wc -l this showed the total lines
+
+
+#! ansible 10.0.0.1 -m setup -a 'filter=ansible_memfree_mb' - ansible_memfree_mb fact. This fact represents the amount of free memory (in megabytes) available on the target host.
+#! ansible 10.0.0.1 -m setup -a 'filter=ansible_mem*'    - everything that starts with mem
+
+#* Ansible idiom ( ansible_facts)
+#* Any module returning a dictionary of 'ansible_facts' is added tot the root of the facts namespace
+#* explanantions are in 'notes' file in this folder. check it if needed.
+# Three dots indicate the end of a YAML document
+...

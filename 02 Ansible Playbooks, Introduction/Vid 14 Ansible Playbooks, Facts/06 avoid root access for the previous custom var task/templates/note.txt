@@ -1,0 +1,10 @@
+this is a custom template to see a host's date.
+if i open a shell to this folder and run the script like this
+./getdate1.fact
+
+it will show this host's current date and time
+
+another format here is 
+./getdate2.fact
+
+it does the same thing

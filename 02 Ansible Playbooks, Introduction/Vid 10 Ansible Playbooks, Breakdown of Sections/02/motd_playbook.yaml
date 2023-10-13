@@ -1,0 +1,28 @@
+---
+- hosts: linux
+  vars:
+    motd_centos: "Welcome to CentOS Tawkir -- Thanks for logging in\n"
+    motd_ubuntu: "Welcome to Ubuntu Tawkir -- Thanks for Logging in\n"
+    ansible_become_pass: admin  # Define the sudo password here
+
+  tasks:
+    - name: Configure a MOTD (message of the day) for CentOS
+      copy:
+        content: "{{ motd_centos }}"
+        dest: /etc/motd
+      notify: MOTD changed
+      when: ansible_distribution == "CentOS"
+      become: yes  # Use sudo for this task
+
+    - name: Configure a MOTD (message of the day) for Ubuntu
+      copy:
+        content: "{{ motd_ubuntu }}"
+        dest: /etc/motd
+      notify: MOTD changed
+      when: ansible_distribution == "Ubuntu"
+      become: yes  # Use sudo for this task
+
+  handlers:
+    - name: MOTD changed
+      debug:
+        msg: The MOTD was changed

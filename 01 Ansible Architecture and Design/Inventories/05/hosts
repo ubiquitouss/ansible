@@ -1,0 +1,21 @@
+[control] 
+10.0.0.7 ansible_connection=local 
+
+[centos]
+10.0.0.1:2222
+10.0.0.[2:3] 
+
+[centos:vars]
+ansible_user=root
+
+
+[ubuntu]
+10.0.0.[4:6]
+
+[ubuntu:vars]
+ansible_become=true
+ansible_become_pass=admin
+
+[linux:children]
+centos
+ubuntu

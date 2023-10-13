@@ -1,0 +1,32 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: all
+
+  # Tasks: the list of tasks that will be executed within the play, this section
+  # can also be used for pre and post tasks
+  tasks:
+    - name: Show IP Address
+      debug:
+        msg: "{{ ansible_default_ipv4.address }}"
+
+        
+#! i made a folder with the command
+#? sudo mkdir -p sudo mkdir -p /etc/ansible/facts.d
+#! copied all the files from the folder 'templates'. after entering the folder 'templates'
+#? sudo cp * /etc/ansible/facts.d
+#! command:
+#? ansible 10.0.0.7 -m setup | more
+#! it showed current date and time of the local host
+
+
+#! to see just the section:
+#? ansible 10.0.0.7 -m setup -a 'filter=ansible_local'
+
+# Three dots indicate the end of a YAML document
+...

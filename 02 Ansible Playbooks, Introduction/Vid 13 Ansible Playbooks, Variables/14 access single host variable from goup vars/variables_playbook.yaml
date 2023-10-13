@@ -1,0 +1,30 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: 10.0.0.1
+  gather_facts: True
+ 
+  # Vars: variables that will apply to the play, on all target systems
+
+  # Tasks: the list of tasks that will be executed within the playbook
+  tasks:
+    - name: Test groupvars with an ansible fact, show that the variable is also accessible from the hostvars section
+      debug:
+        msg: "{{ hostvars[inventory_hostname].ansible_user }}"
+
+#! It showed 'username' only for 10.0.0.1, eventhough it's a group variable
+#! here even though 'hostvars' is a group variable (assigned to full group), it can access only one host
+#! and access the variable
+
+#this task prints the value of ansible_user for the host specified 
+#in inventory_hostname. Essentially, it's demonstrating how you can 
+#access a variable (ansible_user) from the hostvars dictionary 
+#using the current host's name from the inventory (inventory_hostname). 
+#This helps you see that group variables are also accessible from the hostvars dictionary 
+#for each host in the group.
+...
