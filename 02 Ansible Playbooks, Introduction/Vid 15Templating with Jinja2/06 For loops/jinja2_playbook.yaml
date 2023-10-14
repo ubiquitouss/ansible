@@ -11,18 +11,18 @@
   # Tasks: the list of tasks that will be executed within the play, this section
   # can also be used for pre and post tasks
   tasks:
-    - name: Ansible Jinja2 if variable is defined ( where variable is defined )
+    - name: Ansible Jinja2 for statement
       debug:
         msg: >
-             --== Ansible Jinja2 if variable is defined ( where variable is defined ) ==--
+             --== Ansible Jinja2 for statement ==--
 
-             {% set example_variable = 'defined' -%}
-             {% if example_variable is defined -%}
-                example_variable is defined
-             {% else -%}
-                example_variable is not defined
-             {% endif %}
-#! this time this was defined
+             {% for entry in ansible_interfaces -%}
+                Interface entry {{ loop.index }} = {{ entry }}
+             {% endfor %}
 
 # Three dots indicate the end of a YAML document
+
+#! this code worked for 10.0.0.7 , because this is a real host
+#! docker hosts in pnet didn't work, because they are pnet hosts and doesn't expost interfaces like that. 
+#! most importantly the code worked
 ...
